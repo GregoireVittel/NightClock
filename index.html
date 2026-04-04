@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-fullscreen">
 <title>Night Clock</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@300;400&family=Josefin+Sans:wght@100;200;300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Simonetta:ital,wght@0,400;0,900;1,400;1,900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -17,7 +17,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Simonetta', Georgia, serif;
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
@@ -35,15 +35,15 @@ body::before {
   font-size: 22vw;
   font-weight: 300;
   line-height: 1;
-  color: #3a0d0a;
-  text-shadow: 0 0 60px rgba(120,30,20,0.4), 0 0 120px rgba(120,30,20,0.15);
+  color: #6b0f0a;
+  text-shadow: 0 0 60px rgba(180,20,10,0.5), 0 0 120px rgba(180,20,10,0.2);
   font-variant-numeric: tabular-nums;
 }
 
 .divider {
   width: 60px;
   height: 1px;
-  background: #3a1a14;
+  background: #5a1510;
   margin: 20px 0 16px;
 }
 
@@ -51,19 +51,19 @@ body::before {
   display: flex;
   align-items: center;
   gap: 24px;
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 100;
+  font-family: 'Simonetta', Georgia, serif;
+  font-weight: 400;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   font-size: 21px;
-  color: #3a0d0a;
+  color: #6b0f0a;
 }
 
 .dot {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: #3a1a14;
+  background: #5a1510;
 }
 
 #wl-status {
@@ -82,7 +82,7 @@ body::before {
 <div class="bottom-row">
   <span id="datestr" style="font-weight: 600;">---</span>
   <div class="dot"></div>
-  <span id="daystr" style="font-weight: 600;">---</span>
+  <span id="daystr" style="font-weight: 300; font-size: 14px; text-transform: none; letter-spacing: 0;">---</span>
 </div>
 
 <div id="wl-status">◉</div>
@@ -107,7 +107,7 @@ setInterval(tick, 1000);
 
 if ('wakeLock' in navigator) {
   navigator.wakeLock.request('screen').then(function(lock) {
-    document.getElementById('wl-status').style.color = '#3a1a14';
+    document.getElementById('wl-status').style.color = '#5a1510';
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'visible') {
         navigator.wakeLock.request('screen');
