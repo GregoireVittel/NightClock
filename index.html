@@ -83,13 +83,14 @@ body::before {
   <span id="datestr" style="font-weight: 600;">---</span>
   <div class="dot"></div>
   <span id="daystr" style="font-weight: 600;">---</span>
+  <div class="dot"></div>
+  <span id="tempstr" style="font-weight: 600;">--°</span>
 </div>
 
 <div id="wl-status">◉</div>
 
 <script>
 var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function tick() {
   var now = new Date();
@@ -98,12 +99,28 @@ function tick() {
   var hh = (h < 10 ? '0' : '') + h;
   var mm = (m < 10 ? '0' : '') + m;
   document.getElementById('clock').textContent = hh + ':' + mm;
-  document.getElementById('datestr').textContent = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+
+  var dd = (now.getDate() < 10 ? '0' : '') + now.getDate();
+  var mo = (now.getMonth() + 1 < 10 ? '0' : '') + (now.getMonth() + 1);
+  var yy = String(now.getFullYear()).slice(-2);
+  document.getElementById('datestr').textContent = dd + '/' + mo + '/' + yy;
   document.getElementById('daystr').textContent = days[now.getDay()];
+}
+
+function fetchTemp() {
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=48.867&longitude=2.133&current=temperature_2m&temperature_unit=celsius')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var t = Math.round(data.current.temperature_2m);
+      document.getElementById('tempstr').textContent = t + '°';
+    })
+    .catch(function() {});
 }
 
 tick();
 setInterval(tick, 1000);
+fetchTemp();
+setInterval(fetchTemp, 10 * 60 * 1000);
 
 if ('wakeLock' in navigator) {
   navigator.wakeLock.request('screen').then(function(lock) {
