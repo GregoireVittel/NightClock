@@ -35,15 +35,15 @@ body::before {
   font-size: 22vw;
   font-weight: 300;
   line-height: 1;
-  color: #6b0f0a;
-  text-shadow: 0 0 60px rgba(180,20,10,0.5), 0 0 120px rgba(180,20,10,0.2);
+  color: #2a0603;
+  text-shadow: none;
   font-variant-numeric: tabular-nums;
 }
 
 .divider {
   width: 60px;
   height: 1px;
-  background: #5a1510;
+  background: #1a0503;
   margin: 20px 0 16px;
 }
 
@@ -56,14 +56,14 @@ body::before {
   letter-spacing: 0.35em;
   text-transform: uppercase;
   font-size: 21px;
-  color: #6b0f0a;
+  color: #2a0603;
 }
 
 .dot {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: #5a1510;
+  background: #1a0503;
 }
 
 #wl-status {
@@ -107,7 +107,7 @@ setInterval(tick, 1000);
 
 if ('wakeLock' in navigator) {
   navigator.wakeLock.request('screen').then(function(lock) {
-    document.getElementById('wl-status').style.color = '#5a1510';
+    document.getElementById('wl-status').style.color = '#1a0503';
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'visible') {
         navigator.wakeLock.request('screen');
